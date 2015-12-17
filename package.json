@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-q    "run": "node dist/main.js"
+    "run": "node dist/main.js"
   },
   "author": "",
   "license": "ISC",
