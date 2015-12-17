@@ -1,48 +1,32 @@
 'use strict';
 require('babel-polyfill');
 
-import Player from 'player';
 import App from './app';
-const app = new App();
 
-async function main() {
-
-  try {
-    var genresRaw = await app.getGenres();
-  } catch(error) {
-    console.error(error);
+class Menu {
+  constructor() {
+    this.app = new App();
   }
 
-  const style = genresRaw[0];
-
-  try {
-
-    var songs = await app.getSongFromGenre(style);
-  } catch(error) {
-    console.error(error);
+  async getGenres() {
+    return await this.app.getGenres();
   }
 
-  console.log(songs.length, ' genres found !');
-
-  const song = songs[0];
-
-  try {
-    var playing = await app.getStreamUrl(song.stream_url);
-  } catch(error) {
-    console.error(error);
+  async getSongsFromGenre(genre) {
+    if(genre) {
+      return await this.app.getSongFromGenre(genre);
+    }
   }
 
-  console.log('Song is going to be played', song);
+  async getStreamUrlSync(song) {
+    return await this.app.getStreamUrl(song);
+  }
 
-  var player = new Player(playing);
-
-  player.play(function(err, player) {
-    console.log('playend');
-  });
+  getStreamUrl(song) {
+    return this.app.getStreamUrl(song);
+  }
 }
 
-
-main();
-
+export default Menu;
 
 

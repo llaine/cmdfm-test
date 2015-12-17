@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node dist/main.js"
+    "run": "node dist/menu.js",
+    "songs": "node dist/menu.js play minimal",
+    "styles": "node dist/menu.js styles"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +21,7 @@
     "gulp-sourcemaps": "^1.6.0"
   },
   "dependencies": {
+    "commander": "^2.9.0",
     "player": "^0.6.1",
     "request": "^2.67.0"
   }
