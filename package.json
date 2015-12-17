@@ -17,5 +17,8 @@
     "gulp-babel": "^6.1.1",
     "gulp-concat": "^2.6.0",
     "gulp-sourcemaps": "^1.6.0"
+  },
+  "dependencies": {
+    "player": "^0.6.1"
   }
 }
