@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node dist/menu.js",
-    "songs": "node dist/menu.js play minimal",
-    "styles": "node dist/menu.js styles"
+    "run": "node dist/main.js",
+    "play": "node dist/main.js play minimal",
+    "styles": "node dist/main.js styles"
   },
   "author": "",
   "license": "ISC",

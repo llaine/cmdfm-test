@@ -4,7 +4,7 @@ import request from 'request';
 
 const API_ENDPOINT = 'http://cmdto.com/api/v1/apps/fm/genres/';
 
-export default class App {
+export default class Api {
   constructor(...params) {
 
   }
