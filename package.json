@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "node dist/main.js",
-    "play": "node dist/main.js play minimal",
+    "play": "node dist/main.js play jazz",
     "styles": "node dist/main.js styles"
   },
   "author": "",

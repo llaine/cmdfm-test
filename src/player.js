@@ -45,25 +45,26 @@ class Player {
   launchPlayer() {
     var self = this;
     console.log('Launching player');
+    try {
 
-    this.player = new NodePlayer(this.playlist)
-      .enable('stream')
-      .on('playing', function(song) {
-        var player = this;
-        console.info('Playing... ');
+      this.player = new NodePlayer(this.playlist)
+        .enable('stream')
+        .on('playing', function (song) {
+          var player = this;
+          console.info('Playing... ');
 
-        setTimeout(() => {
-          player.next();
-        }, 3000)
-      })
-      .on('playend', function(song) {
-        debug('play done, switching to next one ...')
-      })
-      .on('error', function(err) {
-        console.error(err);
-        self.launchPlayer();
-      })
-      .play();
+          setTimeout(() => {
+            player.next();
+          }, 3000)
+        })
+        .on('playend', function (song) {
+          debug('play done, switching to next one ...')
+        })
+        .play();
+
+    } catch(error) {
+      console.error(error);
+    }
   }
 }
 
