@@ -11,6 +11,7 @@ require('babel-polyfill');
 import program from 'commander';
 import Player from './player';
 let jukebox = new Player();
+
 program
   .version('0.0.1')
   .usage('cmd.fm cli app');

@@ -5,16 +5,21 @@
  * @author llaine
  * @date 18/12/2015
  */
-
-
+import { Playlist } from './models';
 import ApiProxy from './api_proxy';
+import Api from './api';
 import NodePlayer from 'player';
+
+class MusicalPlayer extends NodePlayer {
+  constructor(opts) {
+    super(opts);
+    this.enable('stream');
+  }
+}
 
 class Player {
   constructor() {
     this.api = new ApiProxy();
-    this.playlist = [];
-    this.player = undefined;
   }
 
   async displayStyles() {
@@ -23,48 +28,23 @@ class Player {
   }
 
   async launchPlaylist(style) {
-    console.info('Launch playlist', style)
-    // Array of streamable Song object.
-    const songsArray = await this.api.getSongsFromGenre(style);
-    let iter = songsArray[Symbol.iterator]();
+    this.playlist = await this.api.getSongsFromGenre(style);
+    var playlist = this.playlist.playablePlaylist();
 
-    console.info('Getting playlist of ', songsArray.length);
+    this.player = new MusicalPlayer(playlist);
 
-    var songIter = iter.next();
+    this.player.play();
 
-    // Adding all the songs to the playlist
-    while(!songIter.done) {
-      let song = songIter.value;
-      this.playlist.push(song.url());
-      songIter = iter.next();
-    }
-
-    this.launchPlayer();
+    this.shuffle();
   }
 
-  launchPlayer() {
-    var self = this;
-    console.log('Launching player');
-    try {
-
-      this.player = new NodePlayer(this.playlist)
-        .enable('stream')
-        .on('playing', function (song) {
-          var player = this;
-          console.info('Playing... ');
-
-          setTimeout(() => {
-            player.next();
-          }, 3000)
-        })
-        .on('playend', function (song) {
-          debug('play done, switching to next one ...')
-        })
-        .play();
-
-    } catch(error) {
-      console.error(error);
-    }
+  shuffle() {
+    this.player.on('playing', (song) => {
+      console.log(this.playlist.getSong(song.src));
+      setTimeout(()=>{
+        this.player.next();
+      }, 3000);
+    });
   }
 }
 

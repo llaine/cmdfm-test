@@ -15,7 +15,11 @@ gulp.task("babel", function () {
   return gulp.src("src/**/*.js")
     .pipe(sourcemaps.init())
     .pipe(babel())
-    //.pipe(concat("all.js"))
+    .on('error', function(error) {
+      console.error('Transpiling error');
+      console.log(error);
+      this.emit('end');
+    })
     .pipe(sourcemaps.write(".", { sourceRoot: paths.sourceRoot }))
     .pipe(gulp.dest("dist"));
 });

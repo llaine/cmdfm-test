@@ -1,7 +1,7 @@
 'use strict';
 
 import Api from './api';
-import Song from './models';
+import { Song, Playlist } from './models';
 
 
 class ApiProxy {
@@ -15,17 +15,14 @@ class ApiProxy {
 
   async getSongsFromGenre(genre) {
     if(genre) {
+      const library = new Playlist();
       var songArray = await this.app.getSongFromGenre(genre);
-      return songArray.map((song) => {
-        if(song.is_streamable || song !== undefined) {
-          return new Song(
-              song.title,
-              song.description,
-              song.stream_url,
-              song.duration,
-              song.genre_id)
-        }
-      })
+      songArray.map((song) => {
+        library.set(new Song(song.title, song.description,
+                song.stream_url, song.duration, song.genre_id))
+      });
+
+      return library;
     }
   }
 
