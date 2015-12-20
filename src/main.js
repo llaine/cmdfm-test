@@ -10,6 +10,8 @@ require('babel-polyfill');
 
 import program from 'commander';
 import Player from './player';
+import Menu from './menu';
+let menu = new Menu();
 let jukebox = new Player();
 
 program
@@ -27,7 +29,8 @@ program
   .command('play <style>')
   .description('Launch a playlist with a specific musical style')
   .action((style) => {
-    jukebox.launchPlaylist(style);
+    menu.onLine();
+    //jukebox.launchPlaylist(style);
   });
 
 
