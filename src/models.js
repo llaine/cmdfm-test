@@ -36,7 +36,7 @@ class Playlist {
     this.songs.push(value);
   }
 
-  getSong(key) {
+  getSongInfos(key) {
     return this.songs.find(song => song.url() === key);
   }
 

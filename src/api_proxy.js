@@ -6,6 +6,7 @@ import { Song, Playlist } from './models';
 
 class ApiProxy {
   constructor() {
+    console.log('Api proxy created ...');
     this.app = new Api();
   }
 
@@ -14,6 +15,7 @@ class ApiProxy {
   }
 
   async getSongsFromGenre(genre) {
+    console.log(`Fetchin songs for ${genre}`)
     if(genre) {
       const library = new Playlist();
       var songArray = await this.app.getSongFromGenre(genre);
